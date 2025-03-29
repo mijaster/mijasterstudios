@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Атмосферные частицы (пыль по всему экрану)</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            height: 100vh;
+        }
+
+        .particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(220, 220, 220, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(0.8px);
+        }
+
+        .particle.small {
+            width: 5px;
+            height: 5px;
+        }
+
+        .particle.medium {
+            width: 7px;
+            height: 7px;
+        }
+
+        .particle.large {
+            width: 9px;
+            height: 9px;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles-container" id="particles"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            const particles = [];
+            
+            // Инициализация частиц равномерно по всему экрану
+            function initParticles() {
+                // Очищаем контейнер
+                container.innerHTML = '';
+                particles.length = 0;
+                
+                // Рассчитываем шаг для равномерного распределения
+                const cols = Math.floor(Math.sqrt(particleCount));
+                const rows = Math.ceil(particleCount / cols);
+                const colWidth = window.innerWidth / cols;
+                const rowHeight = window.innerHeight / rows;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    const sizeClass = ['small', 'medium', 'large'][Math.floor(Math.random() * 3)];
+                    
+                    particle.classList.add('particle', sizeClass);
+                    
+                    // Равномерное распределение
+                    const col = i % cols;
+                    const row = Math.floor(i / cols);
+                    let x = col * colWidth + Math.random() * colWidth * 0.5;
+                    let y = row * rowHeight + Math.random() * rowHeight * 0.5;
+                    
+                    // Скорость и направление (45 градусов вниз)
+                    const baseSpeed = 0.3 + Math.random() * 0.7;
+                    const speedX = -baseSpeed * Math.cos(Math.PI/4);
+                    const speedY = baseSpeed * Math.sin(Math.PI/4);
+                    
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    
+                    container.appendChild(particle);
+                    
+                    particles.push({
+                        element: particle,
+                        x: x,
+                        y: y,
+                        speedX: speedX,
+                        speedY: speedY,
+                        life: 300 + Math.random() * 300
+                    });
+                }
+                
+                animateParticles();
+            }
+            
+            function animateParticles() {
+                particles.forEach(p => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.life--;
+                    
+                    // Если частица уходит за границы - перемещаем ее в начало
+                    if (p.x < -50 || p.y > window.innerHeight + 50) {
+                        p.x = window.innerWidth + Math.random() * 100;
+                        p.y = -Math.random() * 100;
+                        p.life = 300 + Math.random() * 300;
+                    }
+                    
+                    p.element.style.left = `${p.x}px`;
+                    p.element.style.top = `${p.y}px`;
+                    p.element.style.opacity = Math.min(0.8, p.life / 400);
+                });
+                
+                requestAnimationFrame(animateParticles);
+            }
+            
+            // Обработчик изменения размера окна
+            window.addEventListener('resize', initParticles);
+            
+            // Инициализация
+            initParticles();
+        });
+    </script>
+</body>
+</html>
