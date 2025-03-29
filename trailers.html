@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="icon" href="imgs/logo_icon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="js/main.js"></script>
-    <script src="js/vedeoplayer.js"></script>
 </head>
 
 <body>
@@ -39,25 +37,8 @@
         </div>
     </header>
 
-    <div class="trailers-container">
-        <div class="game">
-            <!-- Постер -->
-            <img src="imgs/posters/lc.png" alt="poster" class="poster">
-    
-            <!-- Видео-плеер -->
-            <div class="video-player">
-                <video id="video" src="videos/trailers/die.mp4"></video>
-                <div class="controls">
-                    <button id="play-pause-btn">▶️</button>
-                    <span id="current-time">0:00</span>
-                    <input type="range" id="seek-bar" value="0">
-                    <span id="duration">0:00</span>
-                    <button id="mute-btn">🔇</button>
-                    <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="1">
-                    <button id="fullscreen-btn">⤢</button>
-                </div>
-            </div>
-        </div>
+    <div class="trailers-container" id="videos-container">
+        <!-- Видео будут добавляться сюда динамически -->
     </div>
     
     <footer>
@@ -76,5 +57,9 @@
             </div>
         </div>
     </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/videoplayer.js"></script>
+    <script src="js/trailersLoader.js"></script>
 </body>
 </html>
