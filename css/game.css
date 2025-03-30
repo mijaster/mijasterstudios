@@ -1,0 +1,159 @@
+header {
+    backdrop-filter: blur(20px);
+    background-color: transparent;
+    padding-bottom: 3%;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 30px 30px;
+    overflow: hidden;
+    margin-top: -25px;
+    background-color: #1A1D24;
+    width: 60%;
+    margin-bottom: 5%;
+    box-shadow: 0 0 40px #00000042;
+}
+
+.image-bg {
+    transition: background-color 5s linear;
+}
+.image-global-bg {
+    transition: background-color 5s linear;
+}
+
+.poster {
+    width: 1200px;
+    object-fit: cover;
+    height: auto;
+    border-radius: 0 0 30px 30px;
+}
+
+.about-game {
+    margin: 72.5px 96px;
+}
+
+.game-container .name {
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.game-container .date,
+.game-container .dev {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgb(213, 162, 101);
+}
+
+.game-container .date {
+    margin-bottom: 5px;
+    margin-top: 25px;
+}
+.game-container .dev {
+    margin-bottom: 25px;
+}
+
+.game-container .description {
+    font-size: 20px;
+    font-weight: 280;
+    margin-top: 20px;
+}
+
+.game-container .btn {
+    text-transform: uppercase;
+    background-color: #14171C;
+    padding: 10px 30px;
+    border-radius: 20px;
+    margin: 0 96px 30px 96px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+}
+
+.screens-container {
+    margin-top: 70px;
+    position: relative;
+    width: 100%;
+    height: 675px;
+    overflow: hidden;
+}
+
+.screens {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 800ms ease-in-out;
+}
+
+.screen.active {
+    opacity: 1;
+}
+
+.indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 300ms ease;
+}
+
+.indicator.active {
+    background: white;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-arrow {
+    left: 20px;
+}
+
+.right-arrow {
+    right: 20px;
+}

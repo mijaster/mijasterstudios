@@ -1,0 +1,52 @@
+{
+    "lc": {
+        "name": "Lethal Company",
+        "date": "Не объявлена",
+        "dev": "Mijaster Studios",
+        "description": "Описание игры",
+        "poster": "poster.png",
+        "screens_folder": "screens", 
+        "trailer": {
+            "name": "Lethal Company - главный трейлер",
+            "preview": "1.png",
+            "video": "1.mp4"
+        },
+        "trailers-page": {
+            "trailer1": {
+                "name": "Lethal Company - главный трейлер",
+                "preview": "1.png",
+                "video": "1.mp4"
+            },
+            "trailer2": {
+                "name": "Lethal Company - анонсирующий трейлер",
+                "preview": "2.png",
+                "video": "2.mp4"
+            }
+        }
+    },
+    "die": {
+        "name": "D.I.E.",
+        "date": "Не объявлена",
+        "dev": "Mijaster Studios",
+        "description": "Описание игры",
+        "poster": "poster.png",
+        "screens_folder": "screens", 
+        "trailer": {
+            "name": "D.I.E. - главный трейлер",
+            "preview": "1.png",
+            "video": "1.mp4"
+        },
+        "trailers-page": {
+            "trailer1": {
+                "name": "Lethal Company - главный трейлер",
+                "preview": "1.png",
+                "video": "1.mp4"
+            },
+            "trailer2": {
+                "name": "Lethal Company - анонсирующий трейлер",
+                "preview": "2.png",
+                "video": "2.mp4"
+            }
+        }
+    }
+}
