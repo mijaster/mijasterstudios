@@ -1,0 +1,18 @@
+{
+    "coop": {
+        "name": "Кооператив",
+        "icon": "users"
+    },
+    "horror": {
+        "name": "Хоррор",
+        "icon": "skull-crossbones"
+    },
+    "quest": {
+        "name": "Квест",
+        "icon": "map-signs"
+    },
+    "single": {
+        "name": "Одиночный",
+        "icon": "user"
+    }
+}
