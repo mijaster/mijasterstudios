@@ -4,46 +4,98 @@ function initVideoPlayers() {
     videoPlayers.forEach(videoPlayer => {
         const videoElement = videoPlayer.querySelector('video');
         const pausePreview = videoPlayer.querySelector('.pause-preview');
-        const pauseIcon = videoPlayer.querySelector('.pause-icon'); // Иконка паузы
+        const pauseIcon = videoPlayer.querySelector('.pause-icon');
         const playPauseBtn = videoPlayer.querySelector('.play-pause-btn');
         const progressSlider = videoPlayer.querySelector('.progress-slider');
         const timeDisplay = videoPlayer.querySelector('.time-display');
         const volumeSlider = videoPlayer.querySelector('.volume-slider');
         const volumeIcon = videoPlayer.querySelector('.volume-icon');
         const fullscreenBtn = videoPlayer.querySelector('.fullscreen-btn');
+        const customControls = videoPlayer.querySelector('.custom-controls');
+        const videoInfoOverlay = videoPlayer.querySelector('.video-info-overlay');
 
-        // Функция для обновления отображения времени
         function updateTimeDisplay() {
             const currentTime = formatTime(videoElement.currentTime);
             const duration = formatTime(videoElement.duration);
             timeDisplay.textContent = `${currentTime} / ${duration}`;
         }
 
-        // Форматирование времени в формат "минуты:секунды"
         function formatTime(time) {
-            if (isNaN(time)) return '0:00'; // Защита от NaN
+            if (isNaN(time)) return '0:00';
             const minutes = Math.floor(time / 60);
             const seconds = Math.floor(time % 60).toString().padStart(2, '0');
             return `${minutes}:${seconds}`;
         }
 
-        // Ожидаем загрузки метаданных перед отображением времени
+        function toggleFullscreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && 
+                !document.mozFullScreenElement && !document.msFullscreenElement) {
+                // Вход в полноэкранный режим
+                if (videoPlayer.requestFullscreen) {
+                    videoPlayer.requestFullscreen();
+                } else if (videoPlayer.webkitRequestFullscreen) {
+                    videoPlayer.webkitRequestFullscreen();
+                } else if (videoPlayer.mozRequestFullScreen) {
+                    videoPlayer.mozRequestFullScreen();
+                } else if (videoPlayer.msRequestFullscreen) {
+                    videoPlayer.msRequestFullscreen();
+                }
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                // Выход из полноэкранного режима
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+            }
+        }
+
+        function handleFullscreenChange() {
+            if (document.fullscreenElement || document.webkitFullscreenElement || 
+                document.mozFullScreenElement || document.msFullscreenElement) {
+                videoPlayer.classList.add('fullscreen-active');
+                customControls.style.opacity = '1';
+                videoInfoOverlay.style.opacity = '1';
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+            } else {
+                videoPlayer.classList.remove('fullscreen-active');
+                customControls.style.opacity = '';
+                videoInfoOverlay.style.opacity = '';
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+            }
+        }
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+        // Добавляем обработчик нажатия клавиши ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoPlayer.classList.contains('fullscreen-active')) {
+                toggleFullscreen();
+            }
+        });
+
         videoElement.addEventListener('loadedmetadata', () => {
-            updateTimeDisplay(); // Инициализация отображения времени после загрузки метаданных
+            updateTimeDisplay();
         });
 
-        // Показ превью и иконки паузы при паузе
         videoElement.addEventListener('pause', () => {
-            pausePreview.classList.add('visible'); // Показываем превью
-            pauseIcon.classList.add('visible'); // Показываем иконку паузы
+            pausePreview.classList.add('visible');
+            pauseIcon.classList.add('visible');
         });
 
-        // Скрываем превью и иконку паузы при воспроизведении
         videoElement.addEventListener('play', () => {
-            pausePreview.classList.remove('visible'); // Скрываем превью
-            pauseIcon.classList.remove('visible'); // Скрываем иконку паузы
+            pausePreview.classList.remove('visible');
+            pauseIcon.classList.remove('visible');
 
-            // Остановка всех других видео
             videoPlayers.forEach(otherPlayer => {
                 const otherVideo = otherPlayer.querySelector('video');
                 if (otherVideo !== videoElement && !otherVideo.paused) {
@@ -55,7 +107,6 @@ function initVideoPlayers() {
             });
         });
 
-        // Управление воспроизведением/паузой
         playPauseBtn.addEventListener('click', () => {
             if (videoElement.paused) {
                 videoElement.play();
@@ -68,20 +119,17 @@ function initVideoPlayers() {
             }
         });
 
-        // Обновление ползунка прогресса
         videoElement.addEventListener('timeupdate', () => {
             const percentage = (videoElement.currentTime / videoElement.duration) * 100;
             progressSlider.value = percentage;
             updateTimeDisplay();
         });
 
-        // Перемотка видео по ползунку прогресса
         progressSlider.addEventListener('input', () => {
             const time = (progressSlider.value / 100) * videoElement.duration;
             videoElement.currentTime = time;
         });
 
-        // Управление громкостью
         volumeSlider.addEventListener('input', () => {
             videoElement.volume = volumeSlider.value / 100;
             if (videoElement.volume === 0) {
@@ -93,21 +141,16 @@ function initVideoPlayers() {
             }
         });
 
-        // Полноэкранный режим
-        fullscreenBtn.addEventListener('click', () => {
-            if (videoElement.requestFullscreen) {
-                videoElement.requestFullscreen();
-            } else if (videoElement.mozRequestFullScreen) {
-                videoElement.mozRequestFullScreen(); // Firefox
-            } else if (videoElement.webkitRequestFullscreen) {
-                videoElement.webkitRequestFullscreen(); // Chrome, Safari and Opera
-            } else if (videoElement.msRequestFullscreen) {
-                videoElement.msRequestFullscreen(); // IE/Edge
-            }
-        });
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
 
-        // Инициализация отображения времени
+        // Добавляем кнопку закрытия полноэкранного режима
+        const closeFullscreenBtn = document.createElement('button');
+        closeFullscreenBtn.className = 'close-fullscreen-btn';
+        closeFullscreenBtn.innerHTML = '<i class="fas fa-times"></i>';
+        closeFullscreenBtn.addEventListener('click', toggleFullscreen);
+        videoPlayer.appendChild(closeFullscreenBtn);
+
         updateTimeDisplay();
     });
 }
-initVideoPlayers()
+initVideoPlayers();
