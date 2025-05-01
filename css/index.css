@@ -1,19 +1,21 @@
-/* Общие стили */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1F232B;
-    color: white;
-}
-
+/* Баннер */
 .banner-container {
     position: relative;
-    overflow: hidden;
-    height: 91vh;
-    border-radius: 0 0 70px 70px;
+    height: 93.5vh;
     top: 65px;
+    overflow: hidden;
     animation: fadeInUp 2s ease-in-out;
+}
+
+.banner-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent 0%, #000 100%);
+    z-index: 1;
 }
 
 .banner-wrapper {
@@ -22,7 +24,7 @@ body {
     height: 100%;
     overflow: hidden;
     transform: scale(1.2);
-    transition: transform 1.2s ease-in-out;
+    transition: transform 1.2s ease;
 }
 
 .banner-container:hover .banner-wrapper {
@@ -33,18 +35,19 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 95%);
+    mask-image: linear-gradient(to bottom, #000 80%, transparent 95%);
 }
 
-.overlay {
+.banner-container .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.548) 0%, rgba(0, 0, 0, 0.93) 100%);
+    background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 100%);
     opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-    transform: scale(1.5);
+    transition: opacity 0.5s ease;
 }
 
 .banner-container:hover .overlay {
@@ -58,8 +61,9 @@ body {
     transform: translate(-50%, -50%);
     max-width: 120px;
     opacity: 1;
-    animation: zoomIn 2s ease-in-out;
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    animation: zoomIn 2s ease;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 }
 
 .banner-container:hover .banner-logo {
@@ -67,302 +71,688 @@ body {
     transform: translate(-50%, -50%) scale(0.8);
 }
 
-.games-block {
-    background-color: #1F232B;
-    width: 62.5%;
-    height: 376px;
-    margin: 0 auto;
-    margin-top: 180px;
-    border-radius: 30px;
-    overflow: hidden;
-    position: relative;
-    opacity: 1; /* Изначально видимый */
-    transform: translateY(0); /* Без смещения */
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-}
-
-.games-block.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.trailers-block {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 62.5%;
-    height: 376px;
-    overflow: hidden;
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 60px;
-    border-radius: 30px;
-    margin-bottom: 100px;
-    opacity: 1; /* Изначально видимый */
-    transform: translateX(0); /* Без смещения */
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-}
-
-.trailers-block.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Стили для анимаций */
-.fade-in-up {
-    opacity: 0;
-    transform: translateY(50px);
-}
-
-.fade-in-up.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.fade-in-left {
-    opacity: 0;
-    transform: translateX(-50px);
-}
-
-.fade-in-left.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Анимации */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Остальные стили */
-.games-block .title {
-    color: rgb(213, 162, 101);
-    text-transform: uppercase;
-    font-weight: 400;
-}
-
-.games-block .description {
-    font-size: 30px;
-    margin-top: 10px;
-    font-weight: 700;
-}
-
-.games-block a {
+.scroll-hint {
     position: absolute;
-    text-transform: uppercase;
-    font-weight: 500;
-    background-color: #14171C;
-    padding: 10px 30px;
-    border-radius: 20px;
-    color: #FFF;
-    font-size: 14px;
-    margin-top: 10px;
-    transition: color 0.3s ease, font-size 0.3s ease;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
-.games-block a:hover {
-    color: rgb(213, 162, 101);
-    font-size: 16px;
+.scroll-hint:hover {
+    opacity: 1;
 }
 
-.games-block .bg {
-    width: 50%;
+.mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 12px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.wheel {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: #fff;
+    border-radius: 2px;
+    animation: scroll 2s infinite;
+}
+
+.arrow {
+    width: 16px;
+    height: 16px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+}
+
+/* Контент */
+.content-section {
+    position: relative;
+    z-index: 2;
+    margin-top: 65px;
+    background: linear-gradient(to bottom, #000 0%, #000 50%, transparent 50%);
+}
+
+.content-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.content-card {
+    flex: 1;
+    width: 600px;
+    height: 380px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-md);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    background: #000;
+}
+
+.content-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.card-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image-wrapper img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    box-shadow: 0 0 30px #0000002c;
+    transition: transform 1s ease;
 }
 
-.games-block .text {
+.content-card:hover .card-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    color: #fff;
+}
+
+.text-overlay h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    transform: translateY(20px);
+    opacity: 0.9;
+    transition: transform 0.5s ease;
+}
+
+.text-overlay p {
+    font-size: 16px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.1s;
+}
+
+.content-card:hover .text-overlay h3,
+.content-card:hover .text-overlay p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-action {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: 0;
+}
+
+.card-action i {
+    font-size: 12px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.content-card .card-action {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
+.content-card:hover .card-action i {
+    transform: translateX(4px);
+}
+
+/* Последние новости */
+.last-new {
+    width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    animation: fadeInUp 1s ease;
+    border-radius: var(--border-radius-md);
+    background-color: var(--light-bg-color);
+    transition: all 0.3s ease;
+    min-height: 300px;
+    height: auto;
+    cursor: pointer;
+}
+
+.last-new:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.last-new-content {
+    flex: 1;
+    position: relative;
+    padding-bottom: 70px;
+}
+
+.last-new .date {
+    color: #aaa;
+    margin: 40px 50px 0 50px;
+    font-size: 20px;
+    font-weight: 280;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.last-new h3 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 50px 0 50px;
+}
+
+.news-text-container {
+    position: relative;
+    margin: 15px 50px 0 50px;
+    overflow: hidden;
+    max-height: 71px;
+}
+
+.news-text-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent 0%, var(--light-bg-color) 100%);
+}
+
+.last-new .text {
+    color: #ddd;
+    margin-bottom: 25px;
+    font-size: 20px;
+    font-weight: 280;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.news-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+    position: absolute;
+    right: 30px;
+}
+
+.read-more-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.news-gallery {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
+    overflow: hidden;
+    margin: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+.gallery-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+
+.gallery-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.gallery-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.news-gallery:hover .gallery-controls {
+    opacity: 1;
+}
+
+.gallery-btn {
     position: absolute;
     top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    color: #FFF;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 3;
 }
 
-.trailers-block .bg {
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-    opacity: 0.2;
+.gallery-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.trailers-block .bg-1 {
-    background-image: url('imgs/header_banners/btw_1.png');
+.prev-btn {
+    left: 15px;
 }
 
-.trailers-block .bg-2 {
-    background-image: url('imgs/header_banners/btw_2.png');
+.next-btn {
+    right: 15px;
 }
 
-.trailers-block .bg-3 {
-    background-image: url('imgs/header_banners/btw_3.png');
-}
-
-.trailers-block p {
-    padding-left: 15%;
-}
-
-.trailers-block a {
+.gallery-pagination {
     position: absolute;
-    text-transform: uppercase;
-    font-weight: 500;
-    background-color: #14171C;
-    padding: 10px 30px;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+}
+
+.pagination-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.view-all-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 15px;
     border-radius: 20px;
-    margin-left: 15%;
-    color: #FFF;
+    cursor: pointer;
     font-size: 14px;
-    margin-top: 100px;
-    transition: color 0.3s ease, font-size 0.3s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    z-index: 3;
+    opacity: 0;
 }
 
-.trailers-block a:hover {
-    color: rgb(213, 162, 101);
-    font-size: 16px;
+.news-gallery:hover .view-all-btn {
+    opacity: 1;
 }
 
-.trailers-block .title {
+.view-all-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Модальное окно */
+.news-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.news-modal.show {
+    opacity: 1;
+}
+
+.news-modal-content {
+    background-color: var(--bg-color);
+    margin: 100px auto;
+    max-width: 1000px;
+    width: 90%;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.news-modal.show .news-modal-content {
+    transform: translateY(0);
+}
+
+.modal-banner-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.modal-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.modal-body {
+    padding: 30px;
+    color: #fff;
+}
+
+.modal-date {
+    color: #aaa;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.modal-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.modal-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ddd;
+    white-space: pre-line;
+    text-align: justify;
+}
+
+.close-modal {
     position: absolute;
-    color: rgb(213, 162, 101);
-    margin-bottom: 70px;
-    text-transform: uppercase;
-    font-weight: 400;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
 
-.trailers-block .description {
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-gallery-controls {
     position: absolute;
-    text-shadow: 0 0 30px #000000ae;
-    font-weight: 800;
-    font-size: 40px;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
 }
 
-@media (max-width: 1350px) {
-    .games-block {
-        width: 80%;
+.modal-banner-container:hover .modal-gallery-controls,
+.modal-banner-container:hover .modal-gallery-pagination {
+    opacity: 1;
+}
+
+.modal-gallery-btn {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.modal-gallery-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.modal-gallery-pagination {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-pagination-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-pagination-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    body {
+        background-color: #000;
+    }
+
+    .banner-container::after {
+        height: 100px;
+    }
+    
+    .content-section {
+        margin-top: -100px;
+        padding-top: 80px;
+        padding-bottom: 150px;
+    }
+    
+    .content-row {
+        flex-direction: column;
+        width: auto;
+    }
+    
+    .content-card {
+        width: auto;
         height: 300px;
+        border-radius: 0;
     }
-    .games-block .title {
-        font-size: 15px;
+    
+    .text-overlay {
+        padding: 20px;
     }
-    .games-block .description {
-        font-size: 30px;
+    
+    .text-overlay h3 {
+        font-size: 22px;
     }
-    .trailers-block {
-        grid-template-columns: 1fr 1fr 1fr;
-        width: 80%;
-        height: 300px;
-    }
-    .trailers-block p {
-        padding-left: 7%;
-    }
-    .trailers-block .title {
-        font-size: 15px;
-    }
-    .trailers-block .description {
-        font-size: 30px;
-    }
-    .trailers-block a {
-        margin-left: 7%;
-    }
-}
-
-@media (max-width: 1000px) {
-    .games-block .bg {
-        width: 45%;
-    }
-    .games-block .title {
-        font-size: 13px;
-        text-align: center;
-    }
-    .games-block .description {
-        font-size: 25px;
-        text-align: center;
-    }
-    .games-block a {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .trailers-block .title {
-        font-size: 13px;
-        text-align: center;
-    }
-    .trailers-block .description {
-        font-size: 25px;
-        text-align: center;
-    }
-    .trailers-block, .games-block {
-        height: 280px;
-    }
-}
-
-@media (max-width: 660px) {
-    .games-block {
-        margin-top: 110px;
-    }
-    .trailers-block {
-        grid-template-columns: 1fr;
-        margin-top: 40px;
-        margin-bottom: 60px;
-    }
-    .games-block {
-        background-color: #00000000;
-    }
-    .trailers-block .bg-3,
-    .trailers-block .bg-2 {
-        display: none;
-    }
-    .games-block .bg {
+    
+    .last-new {
+        flex-direction: column;
+        gap: 30px;
+        margin: 50px auto;
         width: 100%;
-        opacity: 0.2;
+        border-radius: 0;
     }
-    .games-block .description {
-        text-align: center;
-        font-size: 25px;
-        margin-top: -20px;
+    
+    .news-gallery {
+        max-width: 100%;
+        height: 250px;
+        border-radius: 0;
     }
-    .games-block .text {
-        left: 50%;
-        top: 50%;
-        width: 70%;
+    
+    .last-new h3 {
+        font-size: 28px;
     }
-    .trailers-block a {
-        margin-top: 120px;
+    
+    .last-new .text {
+        font-size: 17px;
     }
-    .games-block a, .trailers-block a  {
-        left: 50%;
-        transform: translateX(-50%);
-        margin-left: 0;
+    
+    .last-new-content {
+        padding: 0 0 20px 0;
     }
-    .trailers-block .description {
-        text-align: center;
+
+    .news-buttons-container {
+        flex-direction: column;
+        align-items: flex-start;
+        position: static;
+        margin-top: 20px;
+        width: 80%;
+        margin: 20px auto 0;
     }
-    .trailers-block, .games-block {
-        height: 220px;
-        width: 90%;
+
+    .card-action {
+        margin-top: 10px;
     }
-    .trailers-block .bg {
-        transform: scale(1.3);
+
+    .news-modal-content {
+        width: 100%;
+        border-radius: 0;
+        margin-top: 200px;
     }
-    .title {
+    
+    .modal-banner-container {
+        height: 200px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-title {
+        font-size: 24px;
+    }
+    
+    .modal-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-container {
+        height: 100vh;
+    }
+
+    .last-new h3 {
+        font-size: 24px;
+        padding-bottom: 10px;
+    }
+    
+    .last-new .text {
+        font-size: 16px;
+    }
+    
+    .view-all-btn {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .card-action {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .modal-banner-container {
+        height: 150px;
+    }
+    
+    .modal-title {
+        font-size: 22px;
+    }
+    
+    .modal-text {
+        font-size: 15px;
+    }
+
+    .banner-logo {
+        width: 90px;
+    }
+
+    .mouse, .content-section .btn, .text-overlay p {
         display: none;
+    }
+
+    .arrow {
+        margin-top: -100px;
+    }
+
+    .last-new {
+        margin-top: -120px;
+    }
+
+    .text-overlay h3 {
+        transform: translateY(10px);
     }
 }
