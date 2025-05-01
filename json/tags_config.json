@@ -14,5 +14,9 @@
     "single": {
         "name": "Одиночный",
         "icon": "user"
+    },
+    "comedy": {
+        "name": "Комедия",
+        "icon": "face-laugh"
     }
 }
