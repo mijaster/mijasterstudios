@@ -1,0 +1,30 @@
+{
+    "news": [
+        {
+            "date": "01-05-2025",
+            "title": "Разработка Lethal Company",
+            "covers": [
+                "imgs/news/1.jpg",
+                "imgs/news/1.jpg"
+            ],
+            "text": "Совсем скоро выйдет демо-версия Lethal Company!Совсем скоро выйдет демо-версия Lethal Company!Совсем скоро выйдет демо-версия Lethal Company!Совсем скоро выйдет демо-версия Lethal Company!Совсем скоро выйдет демо-версия Lethal Company!Совсем скоро выйдет демо-версия Lethal Company!"
+        },
+        {
+            "date": "29-04-2025",
+            "title": "Lethal Company демо",
+            "covers": [
+                "games/lc/screens/1.png",
+                "games/lc/screens/3.png"
+            ],
+            "text": "Совсем скоро выйдет демо-версия Lethal Company!"
+        },
+        {
+            "date": "28-04-2025",
+            "title": "Открытие нашего сайта!",
+            "text": "Описание поста",
+            "covers": [
+                "imgs/default_cover.png"
+            ]
+        }
+    ]
+}
