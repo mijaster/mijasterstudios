@@ -10,33 +10,37 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="icon" href="imgs/logo_icon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <div id="preloader-container" class="preloader"></div>
     <header id="header-container"></header>
 
+    <div class="tags-section">
+        <div class="tags-header">Найдите игры по тегам!</div>
+        <div class="tags-filter-container">
+            <div class="tags-filter" id="tags-filter">
+                <!-- Теги будут добавлены динамически -->
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-tags-wrapper">
+        <button class="mobile-tags-toggle">
+            <i class="fas fa-search"></i> Найти игры по тегам
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+        </button>
+        <div class="mobile-tags-menu"></div>
+    </div>
+
     <div class="games-container">
-        <div class="game">
-            <img src="imgs/posters/lc.png" alt="" class="poster">
-            <div class="overlay"></div>
-            <p class="name">Lethal Company</p>
-            <a href="#" class="more" id="lc">Подробнее</a>
-        </div>
-        <div class="game">
-            <img src="imgs/posters/die.png" alt="" class="poster">
-            <div class="overlay"></div>
-            <p class="name">D.I.E.</p>
-            <a href="#" class="more" id="die">Подробнее</a>
-        </div>
+        <!-- Игры будут добавлены динамически -->
     </div>
 
     <footer id="footer-container"></footer>
 
-    <script src="js/gamesLoader.js" defer></script>
+    <script src="js/loadGamesList.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script src="js/getBtnId.js" defer></script>
     <script src="js/scrollScreens.js" defer></script>
 </body>
 </html>
