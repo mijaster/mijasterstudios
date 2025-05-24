@@ -154,7 +154,7 @@ function openNewsModal() {
     banner.src = currentNews.covers[0];
     date.textContent = currentNews.date;
     title.textContent = currentNews.title;
-    text.textContent = currentNews.text;
+    text.innerHTML = currentNews.text;
     
     // Создаем пагинацию для модального окна
     pagination.innerHTML = '';
@@ -238,7 +238,7 @@ function loadLatestNews() {
                 <div class="news-buttons-container">
                     ${isLongText ? `
                         <button class="read-more-btn">
-                            <span>Читать</span>
+                            <span slyle="padding-right: 100px;">Читать полностью</span>
                             <i class="fas fa-eye"></i>
                         </button>
                     ` : ''}
