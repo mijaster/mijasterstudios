@@ -1,10 +1,24 @@
 {
     "ms": {
         "name": "Mijaster Studios",
-        "logo": "imgs/devs/ms.svg"
+        "logo": "devs/ms/icon.svg",
+        "banner": "devs/ms/banner.mp4",
+        "description": "<p>Погрузитесь в мир, где каждый звук, каждая деталь, визуал работают на ваши эмоции</p>",
+        "contacts": [
+            "https://t.me/mijastervibe",
+            "https://discord.gg/GS6fVXfG"
+        ],
+        "screens": [
+            "devs/ms/screens/1.png",
+            "devs/ms/screens/2.png",
+            "devs/ms/screens/3.png"
+        ],
+        "data": "2025",
+        "bg": "linear-gradient(180deg, #2b2b2b 0%, #000000 100%)"
     },
     "cube": {
         "name": "Cube",
-        "logo": "imgs/devs/cube.svg"
+        "logo": "devs/cube/icon.svg",
+        "bg": "linear-gradient(180deg, #562f2f 0%, #000000 100%)"
     }
 }
