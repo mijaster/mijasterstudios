@@ -13,7 +13,15 @@
             "horror",
             "single",
             "comedy"
-        ]
+        ],
+        "trailers-page": {
+            "trailer1": {
+                "name": "Lethal Company - геймплейный трейлер",
+                "preview": "test.jpg",
+                "video": "test.mp4"
+            }
+        },
+        "trailer": "trailer1"
     },
     "die": {
         "name": "D.I.E.",
