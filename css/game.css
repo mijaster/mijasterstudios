@@ -132,6 +132,23 @@ header {
     align-items: center;
     gap: 8px;
     margin-right: 10px;
+    position: relative; /* Нужно для абсолютного позиционирования ::before */
+}
+
+.dev-item::before {
+    content: '';
+    position: absolute;
+    top: 105%;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(213, 163, 101, 0.345);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.dev-item:hover::before {
+    background-color: rgb(213, 163, 101);
 }
 
 .game-container .date { animation-delay: 0.8s; }
