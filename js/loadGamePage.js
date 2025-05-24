@@ -55,14 +55,30 @@ document.addEventListener("DOMContentLoaded", () => {
         elements.date.textContent = `Дата: ${gameData.date || "Не объявлена"}`;
 
         // Разработчики
+        // В функции populateGamePage заменяем блок обработки разработчиков на:
         if (gameData.dev && gameData.dev.length > 0) {
             const devsHTML = gameData.dev.map(devId => {
                 const devInfo = devsConfig[devId];
-                return devInfo 
-                    ? `<span class="dev-item"><img src="${devInfo.logo}" alt="" class="dev-logo"><span class="dev-name">${devInfo.name}</span></span>` 
-                    : devId;
+                if (devInfo) {
+                    return `
+                        <span class="dev-item" data-dev-id="${devId}" title="Перейти на страницу разработчика">
+                            <img src="${devInfo.logo}" alt="" class="dev-logo">
+                            <span class="dev-name">${devInfo.name}</span>
+                        </span>
+                    `;
+                }
+                return devId;
             }).join(', ');
             elements.dev.innerHTML = `Разработчик: ${devsHTML}`;
+            
+            // Добавляем обработчики кликов
+            document.querySelectorAll('.dev-item').forEach(item => {
+                item.style.cursor = 'pointer';
+                item.addEventListener('click', function() {
+                    const devId = this.getAttribute('data-dev-id');
+                    window.location.href = `dev-single.html?devId=${devId}`;
+                });
+            });
         } else {
             elements.dev.textContent = `Разработчик: Не указан`;
         }
