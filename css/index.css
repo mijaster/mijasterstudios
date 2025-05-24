@@ -417,10 +417,7 @@
     transform: scale(1.2);
 }
 
-.view-all-btn {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+.read-more-btn {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
@@ -431,7 +428,6 @@
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
     z-index: 3;
-    opacity: 0;
 }
 
 .news-gallery:hover .view-all-btn {
@@ -605,9 +601,6 @@
 
 /* Адаптив */
 @media (max-width: 768px) {
-    body {
-        background-color: #000;
-    }
 
     .banner-container::after {
         height: 100px;
@@ -698,6 +691,10 @@
     .modal-text {
         font-size: 16px;
     }
+
+    .read-more-btn {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -712,11 +709,6 @@
     
     .last-new .text {
         font-size: 16px;
-    }
-    
-    .view-all-btn {
-        font-size: 13px;
-        padding: 6px 12px;
     }
 
     .card-action {
