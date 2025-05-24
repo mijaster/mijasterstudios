@@ -19,6 +19,6 @@
     "cube": {
         "name": "Cube",
         "logo": "devs/cube/icon.svg",
-        "bg": "linear-gradient(180deg, #562f2f 0%, #000000 100%)"
+        "bg": "linear-gradient(180deg, #0088ff 0%, #ff0000 100%)"
     }
 }
