@@ -19,6 +19,13 @@
     "cube": {
         "name": "Cube",
         "logo": "devs/cube/icon.svg",
-        "bg": "linear-gradient(180deg, #0088ff 0%, #ff0000 100%)"
+        "banner": "devs/cube/BannerCube.png",
+        "description": "Сальто назад сделать проще, чем игру :}<div>Поэтому я умею делать сальто назад</div>",
+        "contacts": [
+            "https://t.me/mars_amTG",
+            "https://discord.gg/asJM8BC7dN"
+        ],
+        "data": "2025",
+        "bg": "linear-gradient(180deg, #000000 6%, #d10018 100%)"
     }
 }
