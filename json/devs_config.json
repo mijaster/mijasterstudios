@@ -20,12 +20,12 @@
         "name": "Cube",
         "logo": "devs/cube/icon.svg",
         "banner": "devs/cube/BannerCube.png",
-        "description": "Сальто назад сделать проще, чем игру :}<div>Поэтому я умею делать сальто назад</div>",
+        "description": "<b>Сальто назад не принесёт столько эмоций, как наши игры &gt;:]</b>",
         "contacts": [
             "https://t.me/mars_amTG",
             "https://discord.gg/asJM8BC7dN"
         ],
         "data": "2025",
-        "bg": "linear-gradient(180deg, #000000 6%, #d10018 100%)"
+        "bg": "linear-gradient(200deg, #000000 24%, #240000 100%)"
     }
 }
