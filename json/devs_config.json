@@ -20,12 +20,23 @@
         "name": "Cube",
         "logo": "devs/cube/icon.svg",
         "banner": "devs/cube/BannerCube.png",
-        "description": "Сальто назад сделать проще, чем игру :}<div>Поэтому я умею делать сальто назад</div>",
+        "description": "<b>Сальто назад не принесёт столько эмоций, как наши игры &gt;:]</b>",
         "contacts": [
             "https://t.me/mars_amTG",
             "https://discord.gg/asJM8BC7dN"
         ],
         "data": "2025",
-        "bg": "linear-gradient(180deg, #000000 6%, #d10018 100%)"
+        "bg": "linear-gradient(200deg, #000000 24%, #240000 100%)"
+    },
+    "nojoke0": {
+        "name": "nojoke0",
+        "logo": "devs/nojoke0/nojoke0Logo.svg",
+        "banner": "devs/nojoke0/nojoke0Banner.png",
+        "description": "мяу.",
+        "contacts": [
+            "https://t.me/nojokeins"
+        ],
+        "data": "2026",
+        "bg": "linear-gradient(180deg, #0e1610 0%, #000000 88%)"
     }
 }
